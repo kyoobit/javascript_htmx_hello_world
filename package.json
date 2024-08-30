@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "scripts": {
+    "dev": "bun run --watch src/server.tsx",
+    "format": "prettier --write 'src/**/*.{css,html,ts,tsx}'",
+    "lint": "eslint 'src/**/*.{css,html,ts,tsx}'"
+  },
+  "dependencies": {
+    "hono": "^4.5.9"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@types/bun": "latest",
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.3.0"
+  }
+}
