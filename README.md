@@ -44,7 +44,7 @@ https://eslint.org
 ```shell
 npm init @eslint/config
 ```
-```shell
+```text
 ✔ How would you like to use ESLint? problems
 ✔ What type of modules does your project use? esm
 ✔ Which framework does your project use? none
@@ -53,9 +53,14 @@ npm init @eslint/config
 ✔ Would you like to install them now? Yes
 ✔ Which package manager do you want to use? npm
 ```
-```shell
-vi package.json
-+ "lint": "eslint 'src/**/*.{css,html,ts,tsx}'",
+Add the "lint" JSON in the `package.json` file: 
+```json
+{
+   "scripts": {
+    "dev": "bun run --watch src/server.tsx",
++   "lint": "eslint 'src/**/*.{css,html,ts,tsx}'"
+   }
+}
 ```
 ```shell
 bun run lint
@@ -69,8 +74,8 @@ https://prettier.io
 ```shell
 npm install -D prettier
 ```
-```shell
-vi .prettierrc
+Add the following JSON to a file named: `.prettierrc`
+```json
 {
   "arrowParens": "avoid",
   "bracketSpacing": false,
@@ -78,12 +83,47 @@ vi .prettierrc
   "trailingComma": "none"
 }
 ```
-```shell
-vi package.json
-+ "format": "prettier --write 'src/**/*.{css,html,ts,tsx}'",
+Add the "format" JSON in the `package.json` file: 
+```json
+{
+   "scripts": {
+    "dev": "bun run --watch src/server.tsx",
++   "format": "prettier --write 'src/**/*.{css,html,ts,tsx}'",
+    "lint": "eslint 'src/**/*.{css,html,ts,tsx}'"
+   }
+}
 ```
 ```shell
 bun run format
+```
+
+
+
+
+## Add a test framework
+https://playwright.dev/docs/intro
+```shell
+npm init playwright@latest
+```
+```text
+✔ Where to put your end-to-end tests? · tests
+✔ Add a GitHub Actions workflow? (y/N) · true
+✔ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
+```
+
+* `npx playwright test` Runs the end-to-end tests.
+* `npx playwright test --ui` Starts the interactive UI mode.
+* `npx playwright test --project=chromium` Runs the tests only on Desktop Chrome.
+* `npx playwright test example` Runs the tests in a specific file.
+* `npx playwright test --debug` Runs the tests in debug mode.
+* `npx playwright codegen` Auto generate tests with Codegen.
+
+* `./tests/example.spec.ts` Example end-to-end test
+* `./tests-examples/demo-todo-app.spec.ts` Demo Todo App end-to-end tests
+* `./playwright.config.ts` Playwright Test configuration
+
+```shell
+npm init playwright@latest
 ```
 
 
@@ -122,9 +162,15 @@ app.get('/version', (c: Context) => {
 
 export default app;
 ```
-```shell
-vi package.json
-+ "dev": "bun run --watch src/server.tsx",
+Update the "dev" JSON in the `package.json` file: 
+```json
+{
+   "scripts": {
++   "dev": "bun run --watch src/server.tsx",
+    "format": "prettier --write 'src/**/*.{css,html,ts,tsx}'",
+    "lint": "eslint 'src/**/*.{css,html,ts,tsx}'"
+   }
+}
 ```
 
 
