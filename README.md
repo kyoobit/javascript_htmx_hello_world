@@ -239,6 +239,9 @@ git push -u origin main
 javascript_htmx_hello_world
 tree -a -I "node_modules|.git"
 .
+├── .github
+│   └── workflows
+│       └── playwright.yml
 ├── .gitignore
 ├── .prettierrc
 ├── README.md
@@ -246,16 +249,29 @@ tree -a -I "node_modules|.git"
 ├── eslint.config.mjs
 ├── package-lock.json
 ├── package.json
+├── playwright-report
+│   └── index.html
+├── playwright.config.ts
 ├── public
-│   ├── index.html
-│   └── js
-│       ├── htmx.min-v2.0.2.js
-│       └── htmx.min.js -> htmx.min-v2.0.2.js
+│   ├── boosting.html
+│   ├── index.html
+│   ├── js
+│   │   ├── alpinejs.min.js -> alpinejs.v3.14.1.min.js
+│   │   ├── alpinejs.v3.14.1.min.js
+│   │   ├── htmx.min-v2.0.2.js
+│   │   ├── htmx.min.js -> htmx.min-v2.0.2.js
+│   │   └── reload-client.js
+│   └── lazy-loading.html
 ├── src
-│   └── server.tsx
+│   ├── reload-server.ts
+│   └── server.tsx
+├── test-results
+│   └── .last-run.json
+├── tests
+│   └── example.spec.ts
 └── tsconfig.json
 
-4 directories, 12 files
+9 directories, 23 files
 ```
 
 * `README.md` contains instructions on running the project
@@ -271,3 +287,4 @@ tree -a -I "node_modules|.git"
 ```shell
 bun run dev
 ```
+Load the site in a browser: `http://localhost:3000/`
