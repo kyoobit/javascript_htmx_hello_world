@@ -2,9 +2,194 @@
 <head>
     <title>htmx Hello World!</title>
     <script src="/js/htmx.min.js"></script>
+    <script>
+        window.onload = () => {
+            document.body.addEventListener('htmx:configRequest', event => {
+                event.detail.headers['X-Token'] = 'my-token';
+            });
+        };
+    </script>
 </head>
 <body>
     <button hx-get="/version" hx-target="#version">Get Bun Version</button>
     <div id="version"></div>
+
+    <h1>Examples</h1>
+    https://github.com/mvolkmann/htmx-examples
+    <ul>
+        <li>
+            <strong>Boosting with <code>hx-boost</code></strong><br/>
+            <a href="https://htmx.org/attributes/hx-boost/">https://htmx.org/attributes/hx-boost/</a>
+            <p>
+                Load an HTML page: <a href="boosting.html">without hx-boost</a>
+                (<code>link</code> and <code>script</code> tags ARE processed), and
+                <a href="boosting.html" hx-boost="true">with hx-boost</a>
+                (<code>link</code> and <code>script</code> tags are NOT processed)
+            </p>
+        </li>
+        <li>
+            <strong>Lazy Loading with <code>hx-trigger</code></strong><br>
+            <a href="https://htmx.org/attributes/hx-trigger/">https://htmx.org/attributes/hx-trigger/</a>
+            <p>
+                <ul>
+                    <li><code>&lt;element hx-get="/some/content" hx-trigger="click"&gt;&lt;element&gt;</code></li>
+                    <li><code>&lt;element hx-get="/some/content" hx-trigger="load"&gt;&lt;element&gt;</code></li>
+                    <li><code>&lt;element hx-get="/some/content" hx-trigger="revealed"&gt;&lt;element&gt;</code></li>
+                    <li><code>&lt;element hx-get="/some/content" hx-trigger="intersect"&gt;&lt;element&gt;</code></li>
+                </ul>
+            </p>
+            <div>
+                The following content was loaded using:<br/>
+                <code>&lt;div hx-get="/lazy-loading.html" hx-trigger="load"&gt;&lt;/div&gt;</code>
+                <hr/>
+                <div hx-get="/lazy-loading.html" hx-trigger="load"></div>
+                <hr/>
+            </div>
+        </li>
+        <li>
+            <strong>Input Validation with <code>hx-trigger</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-trigger">https://htmx.org/attributes/hx-trigger</a>
+            <form action="get">
+                <label for="ip-address">IP Address</label>
+                <input id="ip-address"
+                    hx-get="/validate-ip-address"
+                    hx-target="#ip-address-validation"
+                    hx-trigger="keyup changed delay:200ms"
+                    name="ip-address"
+                    type="text"
+                />
+                <span class="input-validation" id="ip-address-validation" />
+            </form>
+        </li>
+        <li>
+            <strong>CSS Transitions with <code>hx-swapping</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-swapping">https://htmx.org/attributes/hx-swapping</a>
+            <ul id="css-transitions">
+                <li>item 1</li>
+                <li>item 2</li>
+                <li>item 3</li>
+            </ul>
+            <p>
+                When the button is clicked, add a new item to the bottom of the target list and remove the first item:
+                <button
+                    hx-target="css-transitions"
+                    hx-swap=""
+                >
+                    Perform Action
+                </button>
+            </p>
+        </li>
+        <li>
+            <strong>Form Resetting with <code>hx-indicator</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-indicator">https://htmx.org/attributes/hx-indicator</a>
+            <p>
+                ...
+            </p>
+        </li>
+        <li>
+            <strong>Active Search (type-ahead) with <code>hx-trigger</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-trigger">https://htmx.org/attributes/hx-trigger</a>
+            <form action="post">
+                <label for="search">Search</label>
+                <input
+                    id="search-term"
+                    hx-trigger="keyup changed delay:200ms"
+                    hx-post="/search"
+                    hx-target="#search-results"
+                    name="search-term"
+                    size="{10}"
+                />
+                <ul id="search-results"></ul>
+            </form>
+        </li>
+        <li>
+            <strong>Optimistic content updates with <code>hx-????</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+            <p>
+                ...
+            </p>
+        </li>
+        <li>
+            <strong>Pagination with <code>hx-????</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+            <p>
+                ...
+            </p>
+        </li>
+        <li>
+            <strong>Infinite scroll with <code>hx-????</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+            <p>
+                ...
+            </p>
+        </li>
+        <li>
+            <strong>Toggling a selection with <code>hx-????</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+            <p>
+                ...
+            </p>
+        </li>
+        <li>
+            <strong>Polling with <code>hx-????</code></strong><br>
+            <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+            <p>
+                ...
+            </p>
+        </li>
+        <li>
+            <strong>Custom dialog with <code>hx-????</code></strong><br>
+                <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+                <p>
+                    ...
+                </p>
+        </li>
+        <li>
+            <strong>Adding headers to all requests with <code>htmx:configRequest</code></strong><br>
+                <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+                <p>
+                    ...
+                </p>
+        </li>
+        <li>
+            <strong>Click to Edit with <code>hx-????</code></strong><br>
+             <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+             <p>
+                ...
+             </p>
+        </li>
+        <li>
+            <strong>HTML and JSON with <code>hx-????</code></strong><br>
+             <a herf="https://htmx.org/attributes/hx-????">https://htmx.org/attributes/hx-????</a>
+             <code><pre>
+app.get('/content', (c: Context) => {
+    const content = get_content();
+
+    // Match the client HTTP header "Accept: application/json"
+    // Return `content` in JSON format
+    const accept = c.req.header('accept');
+    if (accept?.includes('application/json')) {
+        return c.json(content);
+    }
+
+    // Return `content` in HTML format
+    return c.html(
+        &lt;ul id="list"&gt;
+        {content.map(todo =&gt; (
+            &lt;ListItem item={item} /&gt;
+        ))}
+        &lt;/ul&gt;
+    );
+});
+            </pre></code>
+        </li>
+    </ul>
+    <div>
+        The following content was loaded using:<br/>
+        <code>&lt;div hx-get="/lazy-loading.html" hx-trigger="revealed"&gt;&lt;/div&gt;</code>
+        <hr/>
+        <div hx-get="/lazy-loading.html" hx-trigger="revealed"></div>
+        <hr/>
+    </div>
 </body>
 </html>
