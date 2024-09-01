@@ -2,6 +2,7 @@
 <head>
     <title>htmx Hello World!</title>
     <script src="/js/htmx.min.js"></script>
+    <script src="/js/reload-client.js" type="module"></script>
     <script>
         window.onload = () => {
             document.body.addEventListener('htmx:configRequest', event => {
@@ -11,11 +12,24 @@
     </script>
 </head>
 <body>
-    <button hx-get="/version" hx-target="#version">Get Bun Version</button>
-    <div id="version"></div>
-
-    <h1>Examples</h1>
-    https://github.com/mvolkmann/htmx-examples
+    <p>
+        <button hx-get="/version" hx-target="#version">Get Bun Version</button>
+        <div id="version"></div>
+    </p>
+    <p>
+        <strong>
+            <a href="https://pragprog.com/titles/mvhtmx/server-driven-web-apps-with-htmx/">
+                Server-Driven Web Apps with htmx<br/>
+                Any Language, Less Code, Simpler Code
+            </a>
+        </strong><br/>
+        Author: R. Mark Volkmann<br/>
+        Published by: The Pragmatic Programmers<br/>
+        <a href="https://github.com/mvolkmann/htmx-examples">
+            https://github.com/mvolkmann/htmx-examples
+        </a>
+    </p>
+    <h1>"Your Turn" Examples</h1>
     <ul>
         <li>
             <strong>Boosting with <code>hx-boost</code></strong><br/>

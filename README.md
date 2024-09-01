@@ -162,6 +162,28 @@ app.get('/version', (c: Context) => {
 
 export default app;
 ```
+The `--watch` flag causes Bun to automatically restart the server if any source file used by the server is modified.
+
+Update the "dev" JSON in the `package.json` file: 
+```json
+{
+   "scripts": {
++   "dev": "bun run --watch src/server.tsx",
+    "format": "prettier --write 'src/**/*.{css,html,ts,tsx}'",
+    "lint": "eslint 'src/**/*.{css,html,ts,tsx}'"
+   }
+}
+```
+Include the `src/reload-server.ts` import in your server `src/server.tsx` file to run a WebSocket connection using port 3001. This allows the client browser to reload when changes are made to the `public/*` file content.
+```javascript
+import {Context, Hono} from 'hono';
+import {serveStatic} from 'hono/bun';
+import './reload-server';
+```
+The `public/js/reload-client.js` script will need to be included into the client HTML `public/index.html` file:
+```html
+<script src="/js/reload-client.js" type="module"></script>
+```
 Update the "dev" JSON in the `package.json` file: 
 ```json
 {
