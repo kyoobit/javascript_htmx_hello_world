@@ -131,12 +131,29 @@ npm init playwright@latest
 
 ## Download the latest htmx
 https://htmx.org/docs/#installing
+
+https://github.com/bigskysoftware/htmx/releases
 ```shell
 mkdir -p app/public/js && cd app/public/js
 curl -L https://unpkg.com/htmx.org@2.0.2 -o htmx.min-v2.0.2.js
 ln -svf htmx.min-v2.0.2.js htmx.min.js
 ```
 
+
+
+
+## Download the latest Alpine.js (optional)
+https://alpinejs.dev/essentials/installation
+
+https://github.com/alpinejs/alpine/releases
+```shell
+cd public/js
+curl -L https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js -o alpinejs.v3.14.1.min.js
+ln -s alpinejs.v3.14.1.min.js alpinejs.min.js
+```
+```html
+<script defer src="/js/alpinejs.min.js"></script>
+```
 
 
 

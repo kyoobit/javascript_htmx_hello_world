@@ -2,6 +2,7 @@
 <head>
     <title>htmx Hello World!</title>
     <script src="/js/htmx.min.js"></script>
+    <script defer src="/js/alpinejs.min.js"></script>
     <script src="/js/reload-client.js" type="module"></script>
     <script>
         window.onload = () => {
@@ -197,13 +198,111 @@ app.get('/content', (c: Context) => {
 });
             </pre></code>
         </li>
+        <li>
+            <strong>Lazy Loading with <code>hx-trigger</code></strong><br>
+            <a href="https://htmx.org/attributes/hx-trigger/">https://htmx.org/attributes/hx-trigger/</a>
+            <p>
+                The following content was loaded using:<br/>
+                <code>&lt;div hx-get="/lazy-loading.html" hx-trigger="revealed"&gt;&lt;/div&gt;</code>
+                <hr/>
+                <div hx-get="/lazy-loading.html" hx-trigger="revealed"></div>
+                <hr/>
+            </p>
+        </li>
+        <li>
+            <p>
+                <strong>Alpine.js</strong><br/>
+                <a href="https://alpinejs.dev">https://alpinejs.dev</a><br/>
+                Alpine is a JavaScript framework that uses custom HTML attributes to add dynamic behavior.
+                Alpine is notable for its ease of use and reduced size compared to other libraries and frameworks.
+            </p>
+            <strong>Alpine.js using <code>x-data</code></strong><br>
+            <a href="https://alpinejs.dev/directives/data">https://alpinejs.dev/directives/data</a>
+            <hr/>
+            <p>
+                <div x-data="{open: false}">
+                    <button @click="open = !open">Toggle</button>
+                    <div x-show="open">Hello, World!</div>
+                </div>
+            </p>
+            <hr/>
+            <p>
+                <div style="display: flex; gap: 1rem" x-data="{count: 0}">
+                    <button @click="count--" :disabled="count === 0">-</button>
+                    <span x-text="count"></span>
+                    <button @click="count++" :disabled="count === 10">+</button>
+                </div>
+            </p>
+            <hr/>
+            <strong>Alpine.js using <code>x-for</code> and <code>x-if</code></strong><br>
+            <a href="https://alpinejs.dev/directives/data">https://alpinejs.dev/directives/data</a><br/>
+            <a href="https://alpinejs.dev/directives/for">https://alpinejs.dev/directives/for</a><br/>
+            <a href="https://alpinejs.dev/directives/if">https://alpinejs.dev/directives/if</a><br/>
+            <script>
+                // Example of some function with data
+                const color_data = function() {
+                    return {
+                        colors: [
+                            {name: "blue", primary: true},
+                            {name: "green", primary: false},
+                            {name: "orange", primary: false},
+                            {name: "purple", primary: false},
+                            {name: "red", primary: true},
+                            {name: "yellow", primary: true},
+                        ],
+                    };
+                }
+            </script>
+            <div style="background-color: gray; width: 6rem; float: left; padding: 1rem; margin: 1rem 2rem 1rem 0" x-data="color_data">
+                <template x-for="color in colors">
+                    <template x-if="color.primary">
+                        <div
+                            :style="{color: color.name, fontSize: '2rem'}"
+                            x-text="color.name" >
+                        </div>
+                    </template>
+                </template>
+            </div>
+            <p style="font-style: italic;">
+                &quot;The following example demonstrates using the `x-for` and `x-if` directives. Both can only be applied to HTML `template` elements. If items in an array used by `x-for` will be added, deleted, or reordered, the template element should include a key attribute that uses `x-bind` to specify a unique value for each array item. This enables Alpine to better manage updating the DOM.&quot;
+            </p>
+            <code><pre>
+colors: [
+    {name: "blue", primary: true},
+    {name: "green", primary: false},
+    {name: "orange", primary: false},
+    {name: "purple", primary: false},
+    {name: "red", primary: true},
+    {name: "yellow", primary: true},
+],
+            </pre></code>
+            <hr/>
+            <strong>Alpine.js using <code>x-data</code> and <code>$data</code></strong><br>
+            <a href="https://alpinejs.dev/directives/data">https://alpinejs.dev/directives/data</a><br/>
+            <a href="https://alpinejs.dev/directives/text">https://alpinejs.dev/directives/text</a><br/>
+            <a href="https://alpinejs.dev/directives/on">https://alpinejs.dev/directives/on</a><br/>
+            <a href="https://alpinejs.dev/magics/data">https://alpinejs.dev/magics/data</a>
+
+            <script>
+                const incrementBoth = function(data) {
+                    data.inner++;
+                    data.outer++;
+                }
+            </script>
+            <div x-data="{outer: 1}">
+                <div>
+                    outer = <span x-text="outer"></span>
+                </div>
+                <div x-data="{inner: 1}">
+                    <div>
+                        inner = <span x-text="inner"></span>
+                    </div>
+                    <button @click="incrementBoth($data)">Increment Both</button>
+                </div>
+            </div>
+            <hr/>
+        </li>
     </ul>
-    <div>
-        The following content was loaded using:<br/>
-        <code>&lt;div hx-get="/lazy-loading.html" hx-trigger="revealed"&gt;&lt;/div&gt;</code>
-        <hr/>
-        <div hx-get="/lazy-loading.html" hx-trigger="revealed"></div>
-        <hr/>
-    </div>
+
 </body>
 </html>
